@@ -4,6 +4,5 @@
     %meta{ charset: 'utf-8' }/
   %body
     %ul
-      - 10.times do |x|
-        %li
-          = "Message #{x}"
+      - messages.each do |message|
+        %li= message

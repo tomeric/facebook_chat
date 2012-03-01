@@ -31,7 +31,13 @@ class FacebookChat
   end
   
   def chat_panel_html
-    render_template 'messages'
+    render_template 'messages', messages: messages
+  end
+  
+  def messages
+    @messages ||= 10.times.map do |n|
+      "Message #{n}"
+    end
   end
   
   def contacts_panel
@@ -80,10 +86,10 @@ class FacebookChat
   
   private
   
-  def render_template(name)
+  def render_template(name, locals = {})
     template = File.expand_path("../../templates/#{name}.haml", __FILE__)
     engine   = Haml::Engine.new(File.open(template).read)
-    engine.render
+    engine.render(Object.new, locals)
   end
 end
 
