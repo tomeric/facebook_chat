@@ -27,11 +27,15 @@ class FacebookChat
   end
   
   def contacts_panel_html
-    render_template 'contacts'
+    render_template 'contacts', contacts: contacts
   end
   
   def chat_panel_html
     render_template 'messages', messages: messages
+  end
+  
+  def contacts
+    @contacts ||= ['John Gruber', 'Mark Zuckerberg', 'Tim Cook', 'Johny Ive']
   end
   
   def messages
