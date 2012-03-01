@@ -1,10 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    haml (3.1.4)
     hotcocoa (0.6.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   hotcocoa

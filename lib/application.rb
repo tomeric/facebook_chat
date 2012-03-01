@@ -27,24 +27,11 @@ class FacebookChat
   end
   
   def contacts_panel_html
-    <<-HTML
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <style type="text/css">
-          html { background: #d6dde4; }
-        </style>
-      </head>
-      <body>
-        <ul>
-          <li>Contact #1</li>
-          <li>Contact #2</li>
-          <li>Contact #3</li>
-        </ul>
-      </body>
-    </html>
-    HTML
+    render_template 'contacts'
+  end
+  
+  def chat_panel_html
+    render_template 'messages'
   end
   
   def contacts_panel
@@ -57,32 +44,6 @@ class FacebookChat
   
   def message_input
     @message_input ||= text_field frame: [150, 0, 350, 24]
-  end
-  
-  def chat_panel_html
-    <<-HTML
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <style type="text/css">
-          html, body { font: ;}
-        </style>
-      </head>
-      <body>
-        <ul>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-          <li>Lorem ipsum dolor sit amet</li>
-        </ul>
-      </body>
-    </html>
-    HTML
   end
   
   def chat_panel
@@ -115,6 +76,14 @@ class FacebookChat
 
   # window/bring_all_to_front
   def on_bring_all_to_front(menu)
+  end
+  
+  private
+  
+  def render_template(name)
+    template = File.expand_path("../../templates/#{name}.haml", __FILE__)
+    engine   = Haml::Engine.new(File.open(template).read)
+    engine.render
   end
 end
 
