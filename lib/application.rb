@@ -1,5 +1,7 @@
 require 'rubygems' # disable this for a deployed application
-require 'hotcocoa'
+require 'bundler'
+
+Bundler.require :default
 
 framework 'WebKit'
 
